@@ -4,8 +4,16 @@ from math import *
 from gmath import *
 
 def scanline_convert(polygons, i, screen, zbuffer ):
-    pass
-
+    polygon = [polygons[i], polygons[i+1], polygons[i+2]]
+    int y_t = polygon[0][1]
+    int y_b = polygon[1][1]
+    for point in polygon:
+        if point[1] > y_t:
+            y_t = point[1]
+        else if point[1] < y_b:
+            y_b = point[1]
+    for y in range(y_b, y_t + 1):
+        
 def add_polygon( polygons, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     add_point(polygons, x0, y0, z0)
     add_point(polygons, x1, y1, z1)
@@ -45,6 +53,7 @@ def draw_polygons( matrix, screen, zbuffer, color ):
                        matrix[point+2][2],
                        screen, zbuffer, color)
         point+= 3
+        
 
 
 def add_box( polygons, x, y, z, width, height, depth ):
